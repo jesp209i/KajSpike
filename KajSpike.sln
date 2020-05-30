@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KajSpike.Domain", "KajSpike
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KajSpike.Framework", "KajSpike.Framework\KajSpike.Framework.csproj", "{B112CF2C-89E4-4982-AFEE-298F57540B38}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KajSpike.ApplicationService", "KajSpike.ApplicationService\KajSpike.ApplicationService.csproj", "{6A1ABF3A-ECE0-4B05-8446-5C8BA697B16D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KajSpike.Persistence", "KajSpike.Persistence\KajSpike.Persistence.csproj", "{73F58D12-45FB-4A89-A88A-11D9AA453413}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{B112CF2C-89E4-4982-AFEE-298F57540B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B112CF2C-89E4-4982-AFEE-298F57540B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B112CF2C-89E4-4982-AFEE-298F57540B38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A1ABF3A-ECE0-4B05-8446-5C8BA697B16D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A1ABF3A-ECE0-4B05-8446-5C8BA697B16D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A1ABF3A-ECE0-4B05-8446-5C8BA697B16D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A1ABF3A-ECE0-4B05-8446-5C8BA697B16D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73F58D12-45FB-4A89-A88A-11D9AA453413}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73F58D12-45FB-4A89-A88A-11D9AA453413}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73F58D12-45FB-4A89-A88A-11D9AA453413}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73F58D12-45FB-4A89-A88A-11D9AA453413}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

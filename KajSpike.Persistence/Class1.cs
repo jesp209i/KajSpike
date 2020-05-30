@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KajSpike.Domain
+namespace KajSpike.Persistence
 {
     public class Class1
     {
