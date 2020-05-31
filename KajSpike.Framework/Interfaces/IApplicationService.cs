@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace KajSpike.Framework.Interfaces
 {
-    public interface IHandleCommand<in T>
+    public interface IApplicationService
     {
-        public Task Handle(T command);
+        public Task Handle(object command);
     }
 }

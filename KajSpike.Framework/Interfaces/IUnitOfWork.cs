@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace KajSpike.Framework.Interfaces
 {
-    public interface IEntityStore
+    public interface IUnitOfWork
     {
-        Task<T> Load<T>(string id);
-        Task Save<T>(T entity);
+        Task Commit();
     }
 }

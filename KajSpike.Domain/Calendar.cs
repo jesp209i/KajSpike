@@ -6,9 +6,8 @@ using System.Linq;
 
 namespace KajSpike.Domain
 {
-    public class Calendar : Entity
+    public class Calendar : AggregateRoot<CalendarId>
     {
-        public CalendarId Id { get; set; }
         public CalendarDescription Description { get; private set; }
         public CalendarMaximumBookingTimeInMinutes MaximumBookingTimeInMinutes { get; private set; }
         public List<Booking> Bookings { get; private set; }
@@ -37,11 +36,15 @@ namespace KajSpike.Domain
                 NewMaximumBookingTimeInMinutes = newMaximumBookingTimeInMinutes
             });
         }
-        public void AddBooking(string nameOfBooker, DateTimeOffset startTime, DateTimeOffset endTime)
+        public void AddBooking(BookingBookedBy nameOfBooker, TimeRange timeRange)
         {
-            var booking = new Booking(nameOfBooker, startTime, endTime, MaximumBookingTimeInMinutes);
-            EnsureNoBookingConflicts(booking);
-            Bookings.Add(booking);
+            Apply(new Events.BookingAdded { 
+                CalendarId = this.Id,
+                BookingId = new Guid(),
+                BookedBy = nameOfBooker,
+                Start = timeRange.Start,
+                End = timeRange.End,
+            });
         }
         public void RemoveBooking(BookingId bookingToRemove)
         {
@@ -69,7 +72,10 @@ namespace KajSpike.Domain
                     MaximumBookingTimeInMinutes = new CalendarMaximumBookingTimeInMinutes(e.NewMaximumBookingTimeInMinutes);
                     break;
                 case Events.BookingAdded e:
-                    throw new NotImplementedException("When Booking added switch case");
+                    var newBooking = new Booking(Apply);
+                    ApplyToEntity(newBooking, e);
+                    EnsureNoBookingConflicts(newBooking);
+                    Bookings.Add(newBooking);
                     break;
                 case Events.BookingRemoved e:
                     throw new NotImplementedException("When Booking removed switch case");

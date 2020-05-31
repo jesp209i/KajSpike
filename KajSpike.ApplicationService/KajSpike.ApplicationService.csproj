@@ -9,7 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\KajSpike.Domain\KajSpike.Domain.csproj" />
     <ProjectReference Include="..\KajSpike.Framework\KajSpike.Framework.csproj" />
+    <ProjectReference Include="..\KajSpike.Persistence\KajSpike.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
