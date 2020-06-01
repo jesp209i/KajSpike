@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace KajSpike.ApplicationService.Projections
+namespace KajSpike.Persistence.Projections
 {
     public static class ReadModels
     {

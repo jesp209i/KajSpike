@@ -1,23 +1,33 @@
-﻿using KajSpike.ApplicationService.Projections;
-using System;
+﻿using KajSpike.Persistence.Projections;
 using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
-using static KajSpike.ApplicationService.Projections.ReadModels;
 using static KajSpike.ApplicationService.QueryModels;
+using static KajSpike.Persistence.Projections.ReadModels;
 
 namespace KajSpike.ApplicationService.Contracts
 {
     public static class Queries
     {
+        public static IEnumerable<CalendarDetails> Query(
+            this IEnumerable<ReadModels.CalendarDetails> allCalendars,
+            GetCalendars query
+            )
+        {
+            return allCalendars;
+        }
         public static CalendarDetails Query(
-            this IEnumerable<ReadModels.CalendarDetails> items,
+            this IEnumerable<ReadModels.CalendarDetails> allCalendars,
             GetCalendar query
             )
-        { 
-            return items.FirstOrDefault(x => x.CalendarId == query.CalendarId); 
+        {
+            return allCalendars.FirstOrDefault(x => x.CalendarId == query.CalendarId);
+        }
+        public static IEnumerable<BookingDetails> Query(
+            this IEnumerable<ReadModels.BookingDetails> allBookings,
+            GetBookingsInCaledar query
+            )
+        {
+            return allBookings.Where(x => x.CalendarId == query.CalendarId).ToList();
         }
     }
 }
