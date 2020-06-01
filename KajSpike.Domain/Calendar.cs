@@ -40,7 +40,7 @@ namespace KajSpike.Domain
         {
             Apply(new Events.BookingAdded { 
                 CalendarId = this.Id,
-                BookingId = new Guid(),
+                BookingId = Guid.NewGuid(),
                 BookedBy = nameOfBooker,
                 Start = timeRange.Start,
                 End = timeRange.End,
@@ -48,9 +48,11 @@ namespace KajSpike.Domain
         }
         public void RemoveBooking(BookingId bookingToRemove)
         {
-            var booking = Bookings.Where(booking => booking.Id == bookingToRemove).FirstOrDefault();
-            if (booking == null) throw new Exception("Booking doesnot exist");
-            Bookings.Remove(booking);
+            Apply(new Events.BookingRemoved
+            {
+                CalendarId = this.Id,
+                BookingId = new BookingId(bookingToRemove)
+            });
         }
 
         private void EnsureNoBookingConflicts(Booking newBooking) => 
@@ -78,7 +80,9 @@ namespace KajSpike.Domain
                     Bookings.Add(newBooking);
                     break;
                 case Events.BookingRemoved e:
-                    throw new NotImplementedException("When Booking removed switch case");
+                    var booking = Bookings.Where(booking => booking.Id == e.BookingId).FirstOrDefault();
+                    if (booking == null) throw new Exception("Booking doesnot exist");
+                    Bookings.Remove(booking);
                     break;
             }
         }
@@ -90,6 +94,6 @@ namespace KajSpike.Domain
             if (validDescription == validMaxBookingTimeInMinutes == false)
                 throw new Exception("Calendar not valid");
         }
-        protected Calendar() { }
+        protected Calendar() { Bookings = new List<Booking>(); }
     }
 }
