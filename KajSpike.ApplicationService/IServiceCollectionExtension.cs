@@ -11,6 +11,7 @@ namespace KajSpike.ApplicationService
         public static IServiceCollection AddApplicationServiceConfiguration(this IServiceCollection services)
         {
             services.AddSingleton<CalendarApplicationService>();
+            services.AddSingleton<IRequestHandler, RequestHandler>();
             return services;
         }
     }

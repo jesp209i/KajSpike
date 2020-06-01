@@ -1,7 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using KajSpike.ApplicationService;
+using KajSpike.ApplicationService.Contracts;
+using KajSpike.ApplicationService.Projections;
+using KajSpike.Framework.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-
+using Serilog;
 
 namespace KajSpike.Controllers
 {
@@ -9,23 +13,16 @@ namespace KajSpike.Controllers
     [Route("calendar")]
     public class CalendarQueryApi : Controller
     {
-        private readonly CalendarApplicationService _appService;
-        public CalendarQueryApi(CalendarApplicationService appService)
+        private readonly IEnumerable<ReadModels.CalendarDetails> _items;
+        private readonly IRequestHandler _handler;
+
+        public CalendarQueryApi(IEnumerable<ReadModels.CalendarDetails> items, IRequestHandler handler)
         {
-            _appService = appService;
+            _items = items;
+            _handler = handler;
         }
         [HttpGet]
-        public async Task<IActionResult> Get(ApplicationService.QueryModels.GetCalendars query)
-        {
-            await _appService.Handle(query);
-            return Ok();
-        }
-        [Route("Bookings")]
-        [HttpGet]
-        public async Task<IActionResult> Get(ApplicationService.QueryModels.GetBookingsInCalendar query)
-        {
-            await _appService.Handle(query);
-            return Ok();
-        }
+        public Task<IActionResult> Get(QueryModels.GetCalendar request) 
+            => _handler.HandleQuery(() => _items.Query(request));
     }
 }
