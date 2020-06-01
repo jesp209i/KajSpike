@@ -1,0 +1,1 @@
+docker run -e "EVENTSTORE_EXT_HTTP_PORT=2113" -e "EVENTSTORE_EXT_TCP_PORT=1113" -p 2113:2113 -p 1113:1113 -d --name=KajSpike-eventstore eventstore/eventstore
