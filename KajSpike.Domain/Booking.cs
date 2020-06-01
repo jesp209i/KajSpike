@@ -9,14 +9,7 @@ namespace KajSpike.Domain
 {
     public class Booking : Entity<BookingId>
     {
-        // Properties to handle the persistence
-        public Guid BookingId { get => this.Id; set { } }
-        protected Booking(BookingId bookingId, CalendarId parentId, BookingBookedBy bookedBy, DateTimeOffset startTime, DateTimeOffset endTime)
-        { 
-        
-        }
 
-        //
         public CalendarId ParentId { get; private set; }
         public TimeRange TimeRange { get; private set; }
 

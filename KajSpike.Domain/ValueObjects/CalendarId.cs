@@ -6,7 +6,7 @@ namespace KajSpike.Domain.ValueObjects
     public class CalendarId: ValueObject<CalendarId>
     {
         private readonly Guid _value;
-        internal  CalendarId(Guid value) => _value = value;
+        public CalendarId(Guid value) => _value = value;
         public static CalendarId FromGuid(Guid id)
         {
             CalendarIdGuard(id);

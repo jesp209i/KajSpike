@@ -1,8 +1,6 @@
-﻿using KajSpike.ApplicationService.Contracts;
-using KajSpike.Domain;
+﻿using KajSpike.Domain;
 using KajSpike.Domain.ValueObjects;
 using KajSpike.Framework.Interfaces;
-using KajSpike.Domain.Interfaces;
 using System;
 using System.Threading.Tasks;
 using static KajSpike.ApplicationService.Contracts.BookingCalendars;
@@ -11,11 +9,11 @@ namespace KajSpike.ApplicationService
 {
     public class CalendarApplicationService : IApplicationService
     {
-        private readonly ICalendarRepository _repository;
+        private readonly IAggregateStore _store;
 
-        public CalendarApplicationService(ICalendarRepository repository)
+        public CalendarApplicationService(IAggregateStore store)
         {
-            _repository = repository;
+            _store = store;
         }
         public Task Handle(object command) =>
             command switch
@@ -44,7 +42,7 @@ namespace KajSpike.ApplicationService
 
         private async Task HandleCreate(V1.CreateCalendar cmd)
         {
-            if (await _repository.Exists(CalendarId.FromGuid(cmd.CalendarId)))
+            if (await _store.Exists<Calendar,CalendarId>(CalendarId.FromGuid(cmd.CalendarId)))
                 throw new InvalidOperationException(
                     $"Entity with id {cmd.CalendarId} already exists");
 
@@ -54,20 +52,10 @@ namespace KajSpike.ApplicationService
                 CalendarMaximumBookingTimeInMinutes.FromNumber(cmd.MaxBookingTimeInMinutes)
             );
 
-            await _repository.Add(calendar);
+            await _store.Save<Calendar, CalendarId>(calendar);
         }
 
-        private async Task HandleUpdate(Guid calendarId, Action<Calendar> operation)
-        {
-            var calendar = await _repository.Load(CalendarId.FromGuid(calendarId));
-            if (calendar == null)
-                throw new InvalidOperationException(
-                    $"Entity with id {calendarId} cannot be found"
-                );
-
-            operation(calendar);
-
-            await _repository.Add(calendar);
-        }
+        private async Task HandleUpdate(Guid calendarId, Action<Calendar> update)
+            => await this.HandleUpdate(_store, new CalendarId(calendarId), update);
     }
 }

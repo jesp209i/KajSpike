@@ -10,7 +10,7 @@ namespace KajSpike.ApplicationService
     {
         public static IServiceCollection AddApplicationServiceConfiguration(this IServiceCollection services)
         {
-            services.AddScoped<CalendarApplicationService>();
+            services.AddSingleton<CalendarApplicationService>();
             return services;
         }
     }

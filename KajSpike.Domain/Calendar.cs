@@ -48,7 +48,7 @@ namespace KajSpike.Domain
         }
         public void RemoveBooking(BookingId bookingToRemove)
         {
-            var booking = Bookings.Where(booking => booking.BookingId == bookingToRemove).FirstOrDefault();
+            var booking = Bookings.Where(booking => booking.Id == bookingToRemove).FirstOrDefault();
             if (booking == null) throw new Exception("Booking doesnot exist");
             Bookings.Remove(booking);
         }
@@ -90,5 +90,6 @@ namespace KajSpike.Domain
             if (validDescription == validMaxBookingTimeInMinutes == false)
                 throw new Exception("Calendar not valid");
         }
+        protected Calendar() { }
     }
 }
