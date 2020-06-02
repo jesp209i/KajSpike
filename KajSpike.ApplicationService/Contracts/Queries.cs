@@ -1,8 +1,8 @@
-﻿using KajSpike.Persistence.Projections;
+﻿using KajSpike.Infrastructure.Projections;
 using System.Collections.Generic;
 using System.Linq;
 using static KajSpike.ApplicationService.QueryModels;
-using static KajSpike.Persistence.Projections.ReadModels;
+using static KajSpike.Infrastructure.Projections.ReadModels;
 
 namespace KajSpike.ApplicationService.Contracts
 {

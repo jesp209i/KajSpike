@@ -4,12 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using EventStore.ClientAPI;
 using KajSpike.Domain;
-using KajSpike.Persistence.Projections;
+using KajSpike.Infrastructure.Projections;
 using Serilog.Events;
 using ILogger = Serilog.ILogger;
 
 
-namespace KajSpike.Persistence
+namespace KajSpike.Infrastructure
 {
     public class EsSubscription
     {

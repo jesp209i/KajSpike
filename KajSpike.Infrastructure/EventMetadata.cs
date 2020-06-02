@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace KajSpike.Persistence
+namespace KajSpike.Infrastructure
 {
     public class EventMetadata
     {

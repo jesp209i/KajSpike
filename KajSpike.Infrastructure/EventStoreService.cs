@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KajSpike.Persistence
+namespace KajSpike.Infrastructure
 {
     public class EventStoreService : IHostedService
     {

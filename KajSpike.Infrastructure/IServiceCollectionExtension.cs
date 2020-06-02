@@ -1,15 +1,11 @@
-﻿using KajSpike.Domain.Interfaces;
-using KajSpike.Framework.Interfaces;
+﻿using KajSpike.Framework.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using EventStore.ClientAPI;
-using System;
 using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
-using KajSpike.Persistence.Projections;
+using KajSpike.Infrastructure.Projections;
 
-namespace KajSpike.Persistence
+namespace KajSpike.Infrastructure
 {
     public static class IServiceCollectionExtension
     {

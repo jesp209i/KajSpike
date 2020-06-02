@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KajSpike.Persistence
+namespace KajSpike.Infrastructure
 {
     public class EsAggregateStore : IAggregateStore
     {

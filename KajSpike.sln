@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KajSpike.Api", "KajSpike\KajSpike.Api.csproj", "{3392FE2A-24C5-4461-A50C-19A3FFEC643C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KajSpike.Api", "KajSpike\KajSpike.Api.csproj", "{3392FE2A-24C5-4461-A50C-19A3FFEC643C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KajSpike.Domain", "KajSpike.Domain\KajSpike.Domain.csproj", "{D9780ADC-E973-48CA-A116-AB59E773C35A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KajSpike.Domain", "KajSpike.Domain\KajSpike.Domain.csproj", "{D9780ADC-E973-48CA-A116-AB59E773C35A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KajSpike.Framework", "KajSpike.Framework\KajSpike.Framework.csproj", "{B112CF2C-89E4-4982-AFEE-298F57540B38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KajSpike.Framework", "KajSpike.Framework\KajSpike.Framework.csproj", "{B112CF2C-89E4-4982-AFEE-298F57540B38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KajSpike.ApplicationService", "KajSpike.ApplicationService\KajSpike.ApplicationService.csproj", "{6A1ABF3A-ECE0-4B05-8446-5C8BA697B16D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KajSpike.ApplicationService", "KajSpike.ApplicationService\KajSpike.ApplicationService.csproj", "{6A1ABF3A-ECE0-4B05-8446-5C8BA697B16D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KajSpike.Persistence", "KajSpike.Persistence\KajSpike.Persistence.csproj", "{73F58D12-45FB-4A89-A88A-11D9AA453413}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KajSpike.Infrastructure", "KajSpike.Infrastructure\KajSpike.Infrastructure.csproj", "{73F58D12-45FB-4A89-A88A-11D9AA453413}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

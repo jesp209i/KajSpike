@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using KajSpike.ApplicationService;
 using KajSpike.ApplicationService.Contracts;
-using KajSpike.Persistence.Projections;
+using KajSpike.Infrastructure.Projections;
 using KajSpike.Framework.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;

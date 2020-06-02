@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Text;
 
-namespace KajSpike.Persistence
+namespace KajSpike.Infrastructure
 {
     public static class EventDeserializer
     {
