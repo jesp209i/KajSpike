@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KajSpike.ApplicationService
+namespace KajSpike.Persistence
 {
     public static class QueryModels
     {

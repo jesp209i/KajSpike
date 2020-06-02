@@ -8,6 +8,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.4" />
+    <PackageReference Include="RavenDB.Client" Version="4.2.103" />
     <PackageReference Include="Serilog" Version="2.9.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
@@ -16,7 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\KajSpike.Domain\KajSpike.Domain.csproj" />
     <ProjectReference Include="..\KajSpike.Framework\KajSpike.Framework.csproj" />
-    <ProjectReference Include="..\KajSpike.Persistence\KajSpike.Persistence.csproj" />
+    <ProjectReference Include="..\KajSpike.Persistence\KajSpike.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

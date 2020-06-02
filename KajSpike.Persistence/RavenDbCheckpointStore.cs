@@ -12,14 +12,35 @@ namespace KajSpike.Persistence
     {
         private readonly Func<IAsyncDocumentSession> _getSession;
         private readonly string _checkpointName;
-        public Task<Position> GetCheckpoint()
+        public RavenDbCheckpointStore(
+            Func<IAsyncDocumentSession> getSession,
+            string checkpointName
+            )
         {
-            throw new NotImplementedException();
+            _getSession = getSession;
+            _checkpointName = checkpointName;
+        }
+        public async Task<Position> GetCheckpoint()
+        {
+            using var session = _getSession();
+            var checkpoint = await session.LoadAsync<Checkpoint>(_checkpointName);
+            return checkpoint?.Position ?? Position.Start;
         }
 
-        public Task StoreCheckpoint(Position checkpoint)
+        public async Task StoreCheckpoint(Position position)
         {
-            throw new NotImplementedException();
+            using var session = _getSession();
+            var checkpoint = await session.LoadAsync<Checkpoint>(_checkpointName);
+            if (checkpoint == null)
+            {
+                checkpoint = new Checkpoint
+                {
+                    Id = _checkpointName
+                };
+                await session.StoreAsync(checkpoint);
+            }
+            checkpoint.Position = position;
+            await session.SaveChangesAsync();
         }
     }
 }

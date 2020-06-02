@@ -9,6 +9,6 @@ namespace KajSpike.Framework.Interfaces
     public interface ICheckpointStore
     {
         Task<Position> GetCheckpoint();
-        Task StoreCheckpoint(Position checkpoint);
+        Task StoreCheckpoint(Position position);
     }
 }

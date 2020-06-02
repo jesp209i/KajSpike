@@ -56,6 +56,6 @@ namespace KajSpike.ApplicationService
         }
 
         private async Task HandleUpdate(Guid calendarId, Action<Calendar> update)
-            => await this.HandleUpdate(_store, new CalendarId(calendarId), update);
+            => await this.HandleUpdate(_store, CalendarId.FromGuid(calendarId), update);
     }
 }

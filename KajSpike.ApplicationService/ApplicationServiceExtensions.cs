@@ -14,7 +14,7 @@ namespace KajSpike.ApplicationService
             Action<T> operation) where T : AggregateRoot<TId>
         {
             var aggregate = await store.Load<T, TId>(aggregateId);
-            if (aggregate == null) throw new InvalidOperationException($"Entity with id {aggregateId.ToString()} cannot be found");
+            if (aggregate.Version == -1) throw new InvalidOperationException($"Entity with id {aggregateId.ToString()} cannot be found");
 
             operation(aggregate);
             await store.Save<T, TId>(aggregate);
