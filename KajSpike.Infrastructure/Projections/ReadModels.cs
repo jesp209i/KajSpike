@@ -6,6 +6,11 @@ namespace KajSpike.Infrastructure.Projections
 {
     public static class ReadModels
     {
+        public class CalendarOverview
+        {
+            public Guid CalendarId { get; set; }
+            public string Description { get; set; }
+        }
         public class CalendarDetails
         {
             public Guid CalendarId { get; set; }

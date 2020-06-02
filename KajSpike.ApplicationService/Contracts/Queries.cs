@@ -8,8 +8,8 @@ namespace KajSpike.ApplicationService.Contracts
 {
     public static class Queries
     {
-        public static IEnumerable<CalendarDetails> Query(
-            this IEnumerable<ReadModels.CalendarDetails> allCalendars,
+        public static IEnumerable<CalendarOverview> Query(
+            this IEnumerable<ReadModels.CalendarOverview> allCalendars,
             GetCalendars query
             )
         {

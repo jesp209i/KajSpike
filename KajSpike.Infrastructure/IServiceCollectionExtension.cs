@@ -16,11 +16,13 @@ namespace KajSpike.Infrastructure
             var store = new EsAggregateStore(esConnection);
 
             var calenderDetails = new List<ReadModels.CalendarDetails>();
+            var calenderOverviews = new List<ReadModels.CalendarOverview>();
             var bookingDetails = new List<ReadModels.BookingDetails>();
             services.AddSingleton<IEnumerable<ReadModels.CalendarDetails>>(calenderDetails);
+            services.AddSingleton<IEnumerable<ReadModels.CalendarOverview>>(calenderOverviews);
             services.AddSingleton<IEnumerable<ReadModels.BookingDetails>>(bookingDetails);
 
-            var subscription = new EsSubscription(esConnection, calenderDetails, bookingDetails);
+            var subscription = new EsSubscription(esConnection, calenderDetails, calenderOverviews, bookingDetails);
             
             services.AddSingleton(esConnection);
             services.AddSingleton<IAggregateStore>(store);

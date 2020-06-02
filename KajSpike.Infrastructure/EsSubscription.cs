@@ -6,6 +6,7 @@ using EventStore.ClientAPI;
 using KajSpike.Domain;
 using KajSpike.Infrastructure.Projections;
 using Serilog.Events;
+using static KajSpike.Infrastructure.Projections.ReadModels;
 using ILogger = Serilog.ILogger;
 
 
@@ -16,14 +17,20 @@ namespace KajSpike.Infrastructure
         private static readonly ILogger Log = Serilog.Log.ForContext<EsSubscription>();
 
         private readonly IEventStoreConnection _connection;
-        private readonly IList<ReadModels.CalendarDetails> _calendarDetails; 
+        private readonly IList<ReadModels.CalendarDetails> _calendarDetails;
+        private readonly IList<ReadModels.CalendarOverview> _calendarOverviews;
         private readonly IList<ReadModels.BookingDetails> _bookingDetails;
         private EventStoreAllCatchUpSubscription _subscription;
 
-        public EsSubscription(IEventStoreConnection connection, IList<ReadModels.CalendarDetails> calendarDetails, IList<ReadModels.BookingDetails> bookingDetails)
+        public EsSubscription(
+            IEventStoreConnection connection, 
+            IList<ReadModels.CalendarDetails> calendarDetails,
+            IList<ReadModels.CalendarOverview> calendarOverviews,
+            IList<ReadModels.BookingDetails> bookingDetails)
         {
             _connection = connection;
             _calendarDetails = calendarDetails;
+            _calendarOverviews = calendarOverviews;
             _bookingDetails = bookingDetails;
         }
 
@@ -54,15 +61,20 @@ namespace KajSpike.Infrastructure
                         MaximumBookingTimeInMinutes = e.MaximumBookingTimeInMinutes,
                         NumberOfBookings = 0
                     });
+                    _calendarOverviews.Add(new ReadModels.CalendarOverview {
+                        CalendarId = e.CalendarId,
+                        Description = e.CalendarDescription
+                    });
                     break;
                 case Events.CalendarDescriptionChanged e:
-                    UpdateItem(e.CalendarId, c => c.Description = e.NewCalendarDescription);
+                    UpdateCalendarDetails(e.CalendarId, c  => c.Description = e.NewCalendarDescription);
+                    UpdateCalendarOverview(e.CalendarId, c => c.Description = e.NewCalendarDescription);
                     break;
                 case Events.CalendarMaxBookingTimeChanged e:
-                    UpdateItem(e.CalendarId, c => c.MaximumBookingTimeInMinutes = e.NewMaximumBookingTimeInMinutes);
+                    UpdateCalendarDetails(e.CalendarId, c => c.MaximumBookingTimeInMinutes = e.NewMaximumBookingTimeInMinutes);
                     break;
                 case Events.BookingAdded e:
-                    UpdateItem(e.CalendarId, c => c.NumberOfBookings++);
+                    UpdateCalendarDetails(e.CalendarId, c => c.NumberOfBookings++);
                     _bookingDetails.Add(new ReadModels.BookingDetails 
                     { 
                         CalendarId = e.CalendarId,
@@ -73,7 +85,7 @@ namespace KajSpike.Infrastructure
                     });
                     break;
                 case Events.BookingRemoved e:
-                    UpdateItem(e.CalendarId, c => c.NumberOfBookings--);
+                    UpdateCalendarDetails(e.CalendarId, c => c.NumberOfBookings--);
                     _bookingDetails.Remove(
                         _bookingDetails.FirstOrDefault(b => b.BookingId == e.BookingId));
                     break;
@@ -82,11 +94,16 @@ namespace KajSpike.Infrastructure
             return Task.CompletedTask;
         }
 
-        private void UpdateItem(Guid id, Action<ReadModels.CalendarDetails> update)
+        private void UpdateCalendarDetails(Guid id, Action<ReadModels.CalendarDetails> update)
         {
             var item = _calendarDetails.FirstOrDefault(x => x.CalendarId == id);
             if (item == null) return;
-
+            update(item);
+        }
+        private void UpdateCalendarOverview(Guid id, Action<ReadModels.CalendarOverview> update)
+        {
+            var item = _calendarOverviews.FirstOrDefault(x => x.CalendarId == id);
+            if (item == null) return;
             update(item);
         }
 
