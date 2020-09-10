@@ -1,7 +1,6 @@
 version: '3.5'
 
 services:
-
   eventstore:
     container_name: KajSpike-eventstore
     image: eventstore/eventstore
@@ -11,3 +10,12 @@ services:
     environment:
       - EVENTSTORE_EXT_HTTP_PORT=2113
       - EVENTSTORE_EXT_TCP_PORT=1113
+  kajspike:
+    container_name: KajSpike-App
+    image: kajspike
+    ports:
+      - 8085:80
+      - 8086:443
+    deploy:
+      replicas: 2
+
